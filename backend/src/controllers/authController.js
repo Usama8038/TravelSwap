@@ -1,5 +1,26 @@
 const User = require('../models/User');
 
+// Helper function to send token response with secure HTTP-only cookie
+const sendTokenResponse = (user, statusCode, res) => {
+  const token = user.getSignedJwtToken();
+
+  const options = {
+    expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // 30 days
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'lax'
+  };
+
+  res
+    .status(statusCode)
+    .cookie('token', token, options)
+    .json({
+      success: true,
+      token, // Also send in body for frontend state if needed
+      user: { id: user._id, name: user.name, email: user.email, role: user.role, avatar: user.avatar, kyc: user.kyc, wallet: user.wallet }
+    });
+};
+
 // @desc    Register user
 // @route   POST /api/auth/register
 exports.register = async (req, res) => {
@@ -12,13 +33,7 @@ exports.register = async (req, res) => {
     }
 
     const user = await User.create({ name, email, password, phone });
-    const token = user.getSignedJwtToken();
-
-    res.status(201).json({
-      success: true,
-      token,
-      user: { id: user._id, name: user.name, email: user.email, role: user.role, avatar: user.avatar }
-    });
+    sendTokenResponse(user, 201, res);
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
   }
@@ -44,13 +59,7 @@ exports.login = async (req, res) => {
       return res.status(401).json({ success: false, message: 'Invalid credentials' });
     }
 
-    const token = user.getSignedJwtToken();
-
-    res.json({
-      success: true,
-      token,
-      user: { id: user._id, name: user.name, email: user.email, role: user.role, avatar: user.avatar, kyc: user.kyc }
-    });
+    sendTokenResponse(user, 200, res);
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
   }
@@ -73,15 +82,24 @@ exports.googleAuth = async (req, res) => {
       user = await User.create({ name, email, googleId, avatar, isVerified: true, password: googleId + '_google_' + Date.now() });
     }
 
-    const token = user.getSignedJwtToken();
-    res.json({
-      success: true,
-      token,
-      user: { id: user._id, name: user.name, email: user.email, role: user.role, avatar: user.avatar }
-    });
+    sendTokenResponse(user, 200, res);
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
   }
+};
+
+// @desc    Logout user / clear cookie
+// @route   GET /api/auth/logout
+exports.logout = async (req, res) => {
+  res.cookie('token', 'none', {
+    expires: new Date(Date.now() + 10 * 1000),
+    httpOnly: true
+  });
+
+  res.status(200).json({
+    success: true,
+    message: 'Logged out successfully'
+  });
 };
 
 // @desc    Get current logged in user
