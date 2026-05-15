@@ -1,0 +1,213 @@
+@import url('https://api.fontshare.com/v2/css?f[]=clash-display@200,300,400,500,600,700&display=swap');
+@import url('https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&display=swap');
+@import "tailwindcss";
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: 'Satoshi', system-ui, sans-serif;
+  --font-display: 'Clash Display', system-ui, sans-serif;
+  --color-primary: var(--primary);
+  --color-primary-dark: var(--primary-dark);
+  --color-primary-light: var(--primary-light);
+  --color-accent: var(--accent);
+}
+
+:root {
+  /* TravelSwap - Ultra-Premium Cinematic Luxury */
+  --background: #000000; /* Deep Obsidian Black */
+  --foreground: #F5F5F5;
+  --card-bg: #0B0B0B; /* Deep Graphite */
+  --card-border: rgba(212, 175, 55, 0.1); /* Subtle Gold Hint */
+  --muted: #B8B8B8;
+  --muted-bg: #050505;
+  
+  --primary: #ffffff;
+  --primary-dark: #f3f4f6;
+  --primary-light: #e5e7eb;
+  --accent: #D4AF37; /* Luxury Gold */
+  --success: #C6A85B; /* Muted Gold */
+  --soft-violet: #8c7328;
+
+  --glass-bg: rgba(11, 11, 11, 0.6);
+  --glass-border: rgba(212, 175, 55, 0.08);
+  --nav-bg: rgba(0, 0, 0, 0.85);
+  
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+  --shadow: 0 8px 30px rgba(0, 0, 0, 0.8), 0 0 1px rgba(212, 175, 55, 0.05) inset;
+  --shadow-lg: 0 30px 60px rgba(0, 0, 0, 0.9), 0 0 2px rgba(212, 175, 55, 0.15) inset;
+  
+  --gradient-primary: linear-gradient(135deg, #ffffff 0%, #D4AF37 100%);
+  --gradient-hero: linear-gradient(180deg, #000000 0%, #050505 100%);
+  --gradient-accent: linear-gradient(135deg, #D4AF37 0%, #C6A85B 100%);
+  --glow-color: rgba(212, 175, 55, 0.15);
+  --neon-line: linear-gradient(90deg, transparent, #D4AF37, #C6A85B, transparent);
+}
+
+/* Force dark mode everywhere */
+[data-theme="dark"], [data-theme="light"] {
+  --background: #000000;
+  --foreground: #F5F5F5;
+  --card-bg: #0B0B0B;
+  --card-border: rgba(212, 175, 55, 0.1);
+  --muted: #B8B8B8;
+  --muted-bg: #050505;
+  --primary: #ffffff;
+  --primary-dark: #f3f4f6;
+  --primary-light: #e5e7eb;
+  --accent: #D4AF37;
+  --success: #C6A85B;
+  --soft-violet: #8c7328;
+  --glass-bg: rgba(11, 11, 11, 0.6);
+  --glass-border: rgba(212, 175, 55, 0.08);
+  --nav-bg: rgba(0, 0, 0, 0.85);
+  --gradient-primary: linear-gradient(135deg, #ffffff 0%, #D4AF37 100%);
+  --gradient-hero: linear-gradient(180deg, #000000 0%, #050505 100%);
+  --gradient-accent: linear-gradient(135deg, #D4AF37 0%, #C6A85B 100%);
+  --glow-color: rgba(212, 175, 55, 0.15);
+  --neon-line: linear-gradient(90deg, transparent, #D4AF37, #C6A85B, transparent);
+}
+
+html { scroll-behavior: smooth; background-color: #000000; }
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: 'Satoshi', system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6, .font-display {
+  font-family: 'Clash Display', system-ui, -apple-system, sans-serif;
+  letter-spacing: 0.02em;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #1A1A1A; border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+/* TravelSwap Premium Glass Card */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow);
+}
+
+/* Gradient Text */
+.gradient-text {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-accent {
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Animated backgrounds */
+.gradient-bg {
+  background: var(--gradient-accent);
+  color: #000000;
+  font-weight: 600;
+  transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.gradient-bg:hover {
+  opacity: 0.9;
+  box-shadow: 0 10px 20px var(--glow-color);
+}
+
+/* Smooth Luxury Hover Physics */
+.card-hover {
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--card-border);
+}
+.card-hover::before {
+  content: "";
+  position: absolute;
+  top: 0; left: -100%; width: 50%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.08), transparent);
+  transform: skewX(-20deg);
+  transition: all 0.8s ease;
+}
+.card-hover:hover::before {
+  left: 150%;
+}
+.card-hover:hover {
+  transform: translateY(-2px) scale(1.01);
+  box-shadow: var(--shadow-lg), 0 0 30px var(--glow-color);
+  border-color: rgba(212, 175, 55, 0.4);
+}
+
+/* Advanced button press */
+.btn-press {
+  transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.btn-press:active {
+  transform: scale(0.97);
+}
+
+/* Form elements */
+input, select, textarea {
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  background-color: var(--card-bg);
+  color: var(--foreground);
+  border: 1px solid var(--card-border);
+}
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 1px var(--glow-color);
+}
+
+/* Premium Animations */
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-12px) scale(1.02); }
+}
+.animate-float-slow {
+  animation: float-slow 12s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.2; filter: blur(60px); }
+  50% { opacity: 0.5; filter: blur(80px); }
+}
+.animate-pulse-glow {
+  animation: pulse-glow 8s ease-in-out infinite;
+}
+
+/* Gold Route Line Animation */
+.neon-route-line {
+  height: 2px;
+  background: var(--card-border);
+  position: relative;
+  overflow: hidden;
+  border-radius: 2px;
+}
+.neon-route-line::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; width: 50%; height: 100%;
+  background: var(--neon-line);
+  animation: route-travel 3s infinite cubic-bezier(0.4, 0, 0.2, 1);
+}
+@keyframes route-travel {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+
+.page-enter { opacity: 0; transform: translateY(20px); filter: blur(4px); }
+.page-enter-active { opacity: 1; transform: translateY(0); filter: blur(0); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
