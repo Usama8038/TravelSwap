@@ -1,179 +1,100 @@
-# Obsidian Move 🎫✈️
+# TravelSwap 🎫✨
 
-> **Recover Money From Cancelled Journeys**
+> **The Stock Market of Premium Travel**
 
-AI-powered travel ticket resale marketplace where users can securely buy and sell already-booked bus, train, and flight tickets.
+TravelSwap is a high-fidelity "Luxury Mobility Exchange" built with AI-powered price intelligence and a secure Escrow system. It allows users to recover value from cancelled journeys by trading unused luxury bus tickets in a secure, futuristic ecosystem.
 
-![Obsidian Move](https://img.shields.io/badge/Obsidian Move-v1.0-6366f1?style=for-the-badge)
-![Next.js](https://img.shields.io/badge/Next.js-14-000000?style=for-the-badge&logo=next.js)
+![TravelSwap](https://img.shields.io/badge/TravelSwap-Production_Ready-D4AF37?style=for-the-badge)
+![Next.js](https://img.shields.io/badge/Next.js-15-000000?style=for-the-badge&logo=next.js)
 ![Express](https://img.shields.io/badge/Express-4-000000?style=for-the-badge&logo=express)
 ![MongoDB](https://img.shields.io/badge/MongoDB-8-47A248?style=for-the-badge&logo=mongodb)
+![Socket.io](https://img.shields.io/badge/Socket.io-Live-010101?style=for-the-badge&logo=socket.io)
 
 ---
 
-## 🚀 Quick Start
+## 💎 The Luxury Mobility Exchange
 
-### Prerequisites
-- Node.js 18+
-- MongoDB (local or Atlas)
-- npm
-
-### 1. Backend Setup
-```bash
-cd backend
-npm install
-# Start MongoDB locally or update .env with your MongoDB URI
-npm run dev
-# API runs on http://localhost:5000
-```
-
-### 2. Seed Sample Data
-```bash
-cd backend
-npm run seed
-```
-
-### 3. Frontend Setup
-```bash
-cd frontend
-npm install
-npm run dev
-# App runs on http://localhost:3000
-```
-
-### 4. Demo Login Credentials
-| Role | Email | Password |
-|------|-------|----------|
-| User | demo@obsidianmove.com | password123 |
-| Admin | admin@obsidianmove.com | password123 |
+TravelSwap is not a generic resale site. It's a premium trading floor for mobility assets:
+- **Cinematic Experience**: Ultra-premium UI inspired by luxury automotive brands (Porsche, Tesla) and first-class travel.
+- **AI Pricing Matrix**: Algorithmic price recommendations based on time-decay velocity, historical route demand, and scarcity.
+- **Secure Escrow Layer**: Funds are held in a secure state until the PNR is verified with the operator via our simulated B2B API.
+- **Global Real-Time Updates**: Instant notifications for market activity, price alerts, and transaction statuses via Socket.io.
 
 ---
 
-## 📁 Project Structure
+## 🚀 Deployment (Production Launch)
+
+This project is configured for one-click deployment to the cloud.
+
+### 1. Database (MongoDB Atlas)
+- Set up a cluster on [MongoDB Atlas](https://www.mongodb.com/).
+- Whitelist your deployment IPs.
+- Copy your `MONGODB_URI`.
+
+### 2. Backend (Render/Railway)
+- Connect this repository to [Render](https://render.com).
+- The `render.yaml` blueprint will automatically configure the Node.js environment.
+- Add your `.env` variables (see section below).
+
+### 3. Frontend (Vercel)
+- Connect the `frontend` folder to [Vercel](https://vercel.com).
+- Set `NEXT_PUBLIC_API_URL` to your production backend endpoint.
+
+---
+
+## 📁 Project Architecture
 
 ```
-├── frontend/                 # Next.js 14 (TypeScript, Tailwind CSS)
-│   ├── src/app/              # App Router pages
-│   ├── src/components/       # Reusable components
-│   ├── src/context/          # Auth & Theme providers
-│   ├── src/data/             # Demo/sample data
-│   └── src/types/            # TypeScript definitions
+├── frontend/                 # Next.js 15 (TypeScript, Tailwind CSS v4)
+│   ├── src/app/              # Cinematic App Router pages
+│   ├── src/context/          # Auth, Theme & Global Real-Time Context
+│   ├── src/hooks/            # useSocket & useAuth custom hooks
+│   └── src/components/       # Glassmorphism & Motion components
 │
-├── backend/                  # Express.js API
-│   ├── src/models/           # Mongoose schemas
-│   ├── src/routes/           # API routes
-│   ├── src/controllers/      # Request handlers
-│   ├── src/middleware/       # Auth, error handling
-│   ├── src/seed/             # Database seeder
-│   └── server.js             # Entry point
+├── backend/                  # Node.js & Express.js API
+│   ├── src/services/         # EscrowService, OperatorService, SocketService
+│   ├── src/controllers/      # AI Pricing Matrix & Auth logic
+│   ├── src/middleware/       # JWT Cookie Protection & Security Headers
+│   └── server.js             # HTTP & Socket.io server entry
 ```
 
 ---
 
-## 🎨 Features
-
-### Core
-- ✅ User authentication (JWT + Google OAuth ready)
-- ✅ Ticket listing & management
-- ✅ Search with advanced filters
-- ✅ Buyer/Seller dashboards
-- ✅ Admin panel with analytics
-- ✅ Profile & KYC verification
-
-### AI-Powered
-- ✅ Smart price recommendations
-- ✅ Fraud detection scoring
-- ✅ Demand prediction
-- ✅ AI chatbot assistant
-
-### UI/UX
-- ✅ Dark/Light mode
-- ✅ Glassmorphism design
-- ✅ Framer Motion animations
-- ✅ Fully responsive (mobile-first)
-- ✅ Loading skeletons
-- ✅ Toast notifications
-- ✅ Empty states
-
-### Payment
-- ✅ Escrow payment flow
-- ✅ Wallet system
-- ✅ Transaction history
-- ✅ Stripe-ready integration
-
----
-
-## 📡 API Endpoints
-
-| Category | Method | Endpoint | Description |
-|----------|--------|----------|-------------|
-| Auth | POST | `/api/auth/register` | Register user |
-| Auth | POST | `/api/auth/login` | Login |
-| Auth | GET | `/api/auth/me` | Get current user |
-| Tickets | GET | `/api/tickets` | Search tickets |
-| Tickets | POST | `/api/tickets` | Create listing |
-| Tickets | GET | `/api/tickets/:id` | Get ticket details |
-| Orders | POST | `/api/orders` | Buy ticket |
-| Orders | GET | `/api/orders/my-purchases` | Buyer's orders |
-| AI | POST | `/api/ai/price-suggest` | AI pricing |
-| AI | POST | `/api/ai/chat` | AI chatbot |
-| Admin | GET | `/api/admin/stats` | Platform stats |
-| Wallet | GET | `/api/wallet/balance` | Wallet balance |
-
----
-
-## 🛠 Tech Stack
-
-| Layer | Technology |
-|-------|-----------|
-| Frontend | Next.js 14, React, TypeScript |
-| Styling | Tailwind CSS v4 |
-| Animations | Framer Motion |
-| Icons | Lucide React |
-| Backend | Express.js, Node.js |
-| Database | MongoDB, Mongoose |
-| Auth | JWT, bcryptjs |
-| Notifications | react-hot-toast |
-
----
-
-## 📱 Pages
-
-| Page | Route | Description |
-|------|-------|-------------|
-| Landing | `/` | Hero, stats, featured tickets |
-| Search | `/search` | Filter & browse tickets |
-| Ticket Detail | `/ticket/[id]` | Full ticket view + buy |
-| Login | `/login` | User authentication |
-| Signup | `/signup` | Account creation |
-| Seller Dashboard | `/dashboard/seller` | Manage listings |
-| Buyer Dashboard | `/dashboard/buyer` | Purchase history |
-| Profile | `/dashboard/profile` | Settings & KYC |
-| Admin | `/admin` | Platform management |
-| About | `/about` | Company info |
-| Contact | `/contact` | Contact form |
-| FAQ | `/faq` | Common questions |
-
----
-
-## 🔒 Environment Variables
+## 🔒 Production Environment Variables
 
 ### Backend (`.env`)
-```
+```bash
 PORT=5000
-MONGODB_URI=mongodb://localhost:27017/obsidianmove
-JWT_SECRET=your_secret_key
-STRIPE_SECRET_KEY=sk_test_xxx
-OPENAI_API_KEY=sk-xxx
+NODE_ENV=production
+MONGODB_URI=mongodb+srv://...
+JWT_SECRET=your_production_secret
+JWT_EXPIRE=30d
+FRONTEND_URL=https://your-app.vercel.app
 ```
 
 ### Frontend (`.env.local`)
+```bash
+NEXT_PUBLIC_API_URL=https://your-backend.onrender.com/api
 ```
-NEXT_PUBLIC_API_URL=http://localhost:5000/api
-```
+
+---
+
+## 🎨 Tech Stack
+
+| Layer | Technology |
+|-------|-----------|
+| **Frontend** | Next.js 15, React, TypeScript |
+| **Styling** | Tailwind CSS v4 (Matte Black & Gold Theme) |
+| **Real-Time** | Socket.io (Global Context) |
+| **Animations** | Framer Motion (Physics-based) |
+| **Backend** | Node.js, Express.js |
+| **Security** | Helmet, HPP, XSS-Clean, Rate-Limiting |
+| **Database** | MongoDB Atlas, Mongoose |
+| **Session** | JWT via Secure HTTP-Only Cookies |
 
 ---
 
 ## 📄 License
 
-MIT License — Built with ❤️ by the Obsidian Move team.
+MIT License — Built with ❤️ for the future of mobility.
+
