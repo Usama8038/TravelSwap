@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: travelswap-backend
+    env: node
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 5000
+      - key: MONGODB_URI
+        fromConfigVar: MONGODB_URI
+      - key: JWT_SECRET
+        generateValue: true
+      - key: FRONTEND_URL
+        value: https://travelswap-frontend.vercel.app # Placeholder, update after frontend deploy
+      - key: JWT_EXPIRE
+        value: 30d

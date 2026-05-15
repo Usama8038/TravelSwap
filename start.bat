@@ -1,0 +1,3 @@
+@echo off
+echo Starting TravelSwap Frontend and Backend concurrently...
+cmd /c "npm run dev"
